@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_research/videos.dart';
+import 'package:media_kit/media_kit.dart';
+
+import 'ip_streaming.dart';
 
 class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);
@@ -23,10 +25,10 @@ class _HomeState extends State<Home> {
       case 0:
         return const Videos();
       case 1:
-        return Text(
-          "TODO page: In development",
-          style: TextStyle(color: Colors.amber.shade900, fontSize: 20),
-        );
+        WidgetsFlutterBinding.ensureInitialized();
+        // Necessary initialization for package:media_kit.
+        MediaKit.ensureInitialized();
+        return const MyScreen();
       default:
         return Text(
           "Exit page: In development",
@@ -52,7 +54,7 @@ class _HomeState extends State<Home> {
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.warning_outlined),
-            label: 'TODO',
+            label: 'Streaming',
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.exit_to_app),
